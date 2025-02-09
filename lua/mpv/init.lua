@@ -24,11 +24,9 @@ local refresh_screen = function()
     local char = chars[math.random(#chars)]
     local dur = math.floor((state.percent/100) * conf.width)
     vim.api.nvim_buf_set_extmark(M.buf, M.ns, 0, 0, {
-        virt_text = {{state.title or 'Not Playing', 'Title'}},  -- Ensure it's always an array with 1 or 2 strings
-        virt_text_pos='overlay',
+        virt_text = {{state.title or (#queue >= 0 and queue[1] or 'Not Playing'), hls.title}}, virt_text_pos='overlay',
         id = M.title_id
     })
-
 
     local time1, time2 = unpack(vim.split(state.timing, ' / '))
     vim.api.nvim_buf_set_extmark(M.buf, M.ns, 0, 0, {
