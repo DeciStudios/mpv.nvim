@@ -33,11 +33,12 @@ local refresh_screen = function()
         virt_lines = {
             { {time1, 'Timer'}, {(" "):rep(conf.width - 16), 'Timer'}, {time2, 'Timer'} },
             { {("▁"):rep(dur), 'Progress'}, {char, 'Progress'}, {("▁"):rep(conf.width-dur), 'Comment'} },
-            { {"", "Comment"} },
+            { {"" , 'Comment'} },
             { {by3.."󰞓 ", 'Progress'}, {by3..(not state.paused and "" or ""), 'Progress'}, {by3.."󰞔 ", 'Progress'} }
         },
         id = M.content_id
     })
+
 
 end
 
