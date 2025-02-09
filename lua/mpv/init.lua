@@ -32,12 +32,18 @@ local refresh_screen = function()
     local parts = vim.split(state.timing, ' / ')
     local time1 = parts[1] or "0:00:00"
     local time2 = parts[2] or "0:00:00"
-    vim.api.nvim_buf_set_extmark(M.buf, M.ns, 0, 0, { 
+    vim.api.nvim_buf_set_extmark(M.buf, M.ns, 0, 0, {
         virt_lines = {
-            { {time1, 'Timer'}, {(" "):rep(conf.width - 16), 'Timer'}, {time2, 'Timer'} },
-            { {("▁"):rep(dur), 'Progress'}, {char, 'Progress'}, {("▁"):rep(conf.width-dur), 'Comment'} },
-            { {"" , 'Comment'} },
-            { {by3.."󰞓 ", 'Progress'}, {by3..(not state.paused and "" or ""), 'Progress'}, {by3.."󰞔 ", 'Progress'} }
+            {
+                {time1, hls.timer}, {(" "):rep(conf.width - 16)}, {time2, hls.timer}
+            },
+            {
+                {("▁"):rep(dur), hls.progress}, {char, hls.progress}, {("▁"):rep(conf.width-dur), "Comment"}
+            },
+            {{"", ""}},
+            {
+                {by3.."󰞓 ", hls.progress}, {by3..(not state.paused and "" or ""), hls.progress}, {by3.."󰞔 ", hls.progress}
+            }
         },
         id = M.content_id
     })
