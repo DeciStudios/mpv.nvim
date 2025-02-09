@@ -22,10 +22,9 @@ local refresh_screen = function()
 
     local chars = { "󰽰" }
     local char = chars[math.random(#chars)]
-
     local dur = math.floor((state.percent/100) * conf.width)
     vim.api.nvim_buf_set_extmark(M.buf, M.ns, 0, 0, {
-        virt_text = {{state.title or (#queue >= 0 and queue[1] or 'Not Playing'), hls.title}}, virt_text_pos='overlay',
+        virt_text = {{state.title or (#queue >= 0 and queue[1] or 'Not Playing'), "Title"}}, virt_text_pos='overlay',
         id = M.title_id
     })
 
