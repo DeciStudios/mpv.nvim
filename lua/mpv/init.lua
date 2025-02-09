@@ -20,6 +20,7 @@ local by3 = (" "):rep(math.floor(conf.width/4)-1)
 local refresh_screen = function()
     if not state.loaded then return end
 
+
     local chars = { "󰽰" }
     local char = chars[math.random(#chars)]
     local dur = math.floor((state.percent/100) * conf.width)
@@ -28,7 +29,9 @@ local refresh_screen = function()
         id = M.title_id
     })
 
-    local time1, time2 = unpack(vim.split(state.timing, ' / '))
+    local parts = vim.split(state.timing, ' / ')
+    local time1 = parts[1] or "0:00:00"
+    local time2 = parts[2] or "0:00:00"
     vim.api.nvim_buf_set_extmark(M.buf, M.ns, 0, 0, { 
         virt_lines = {
             { {time1, 'Timer'}, {(" "):rep(conf.width - 16), 'Timer'}, {time2, 'Timer'} },
